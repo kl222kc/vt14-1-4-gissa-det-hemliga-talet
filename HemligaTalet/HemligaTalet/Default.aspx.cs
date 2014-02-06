@@ -18,8 +18,13 @@ namespace HemligaTalet
         protected void SendGuessButton_Click(object sender, EventArgs e)
         {
             int guess = int.Parse(GuessTextBox.Text);
+            Outcome outcome;
 
-            GuessedLabel.Text += guess.ToString();
+            SecretNumber secretNumber = new SecretNumber();
+            secretNumber.Initalize();
+            outcome = secretNumber.MakeGuess(guess);
+
+            GuessedLabel.Text = outcome.ToString();
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 namespace HemligaTalet.Model
 {
 
-    enum Outcome {Indefinite, Low, High, Correct, NoMoreGuesses, PreviousGuess};
+    public enum Outcome {Indefinite, Low, High, Correct, NoMoreGuesses, PreviousGuess};
     public class SecretNumber
     {
         private int _number;
@@ -15,17 +15,33 @@ namespace HemligaTalet.Model
 
         public bool CanMakeGuess
         {
-            get;
+            get
+            {
+                return Count < _MaxNumberOfGuesses;
+            }
         }
 
         public int Count
         {
-            get;
+            get
+            {
+                return _previousGuesses.Count;
+            }
         }
 
         public int? Number
         {
-            get;
+            get
+            {
+                if (CanMakeGuess)
+                {
+                    return null;
+                }
+                else
+                {
+                    return _number;
+                }
+            }
         }
 
         public Outcome Outcome
@@ -36,11 +52,15 @@ namespace HemligaTalet.Model
 
         public IEnumerable<int> PreviousGuesses
         {
-            get;
+            get
+            {
+                return _previousGuesses;
+            }
         }
 
         public void Initalize()
         {
+            _previousGuesses.Clear();
             Random myRandom = new Random();
             _number = myRandom.Next(1, 101);
             Outcome = Outcome.Indefinite;
@@ -57,33 +77,38 @@ namespace HemligaTalet.Model
 
             if (!CanMakeGuess)
             {
-                return Outcome.PreviousGuess;
+                Outcome = Outcome.NoMoreGuesses;
             }
-
-            if (guess == _number)
+            else if (_previousGuesses.Contains(guess))
             {
-                return Outcome.Correct;
+                Outcome = Outcome.PreviousGuess;
             }
-
-            if (_previousGuesses.Contains(guess))
+            else
             {
-                return Outcome.PreviousGuess;
+                _previousGuesses.Add(guess);
+
+                if (guess == _number)
+                {
+                    Outcome = Outcome.Correct;
+                }
+
+                if (guess > _number)
+                {
+                    Outcome = Outcome.High;
+                }
+
+                if (guess < _number)
+                {
+                    Outcome = Outcome.Low;
+                } 
             }
 
-            if (guess > _number)
-            {
-                return Outcome.High;
-            }
-
-            if (guess < _number)
-            {
-                return Outcome.Low;
-            }
-
+            return Outcome;
         }
 
         public SecretNumber()
         {
+            _previousGuesses = new List<int>(7);
             Initalize();
         }
     }
