@@ -41,17 +41,50 @@ namespace HemligaTalet.Model
 
         public void Initalize()
         {
+            Random myRandom = new Random();
+            _number = myRandom.Next(1, 101);
+            Outcome = Outcome.Indefinite;
 
         }
 
         public Outcome MakeGuess(int guess)
         {
-            
+
+            if (guess > 100 || guess < 1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (!CanMakeGuess)
+            {
+                return Outcome.PreviousGuess;
+            }
+
+            if (guess == _number)
+            {
+                return Outcome.Correct;
+            }
+
+            if (_previousGuesses.Contains(guess))
+            {
+                return Outcome.PreviousGuess;
+            }
+
+            if (guess > _number)
+            {
+                return Outcome.High;
+            }
+
+            if (guess < _number)
+            {
+                return Outcome.Low;
+            }
+
         }
 
         public SecretNumber()
         {
-
+            Initalize();
         }
     }
 }
