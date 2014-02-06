@@ -13,5 +13,10 @@ namespace HemligaTalet
         {
 
         }
+
+        protected void SendGuessButton_Click(object sender, EventArgs e)
+        {
+            int guess = int.Parse(GuessTextBox.Text);
+        }
     }
 }
