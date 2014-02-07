@@ -1,3 +1,7 @@
 ﻿.error {
     color: #cc6565;
 }
+
+#GuessTextBox {
+    width: 50px;
+}
