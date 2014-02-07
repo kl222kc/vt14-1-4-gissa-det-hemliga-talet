@@ -23,10 +23,13 @@
 
         <asp:PlaceHolder ID="PlaceHolder" runat="server" Visible="false">
         <p>
-        <asp:Label ID="HelperLabel" runat="server"></asp:Label>
+            <asp:Label ID="HelperLabel" runat="server"></asp:Label>
         </p>
+        </asp:PlaceHolder>
+
+        <asp:PlaceHolder ID="ButtonPlaceHolder" runat="server" Visible="false">
         <p>
-            <asp:Button ID="ResetButton" runat="server" Text="Slumpa nytt hemligt tal" OnClick="ResetButton_Click" />
+              <asp:Button ID="ResetButton" runat="server" Text="Slumpa nytt hemligt tal" OnClick="ResetButton_Click" ValidateRequestMode="Disabled" />
         </p>
         </asp:PlaceHolder>
        

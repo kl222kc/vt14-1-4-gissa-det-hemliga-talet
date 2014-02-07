@@ -94,6 +94,15 @@ namespace HemligaTalet {
         protected global::System.Web.UI.WebControls.Label HelperLabel;
         
         /// <summary>
+        /// ButtonPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder ButtonPlaceHolder;
+        
+        /// <summary>
         /// ResetButton control.
         /// </summary>
         /// <remarks>

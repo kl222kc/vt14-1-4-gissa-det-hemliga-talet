@@ -34,40 +34,45 @@ namespace HemligaTalet
 
         protected void SendGuessButton_Click(object sender, EventArgs e)
         {
-            int guess = int.Parse(GuessTextBox.Text);
-            Outcome outcome = secretNumber.MakeGuess(guess);
-
-            PlaceHolder.Visible = true;
-
-            if (outcome == Outcome.NoMoreGuesses)
+            if (IsValid)
             {
-                HelperLabel.Text = String.Format("Du har inga gissningarna kvar. Det hemliga talet var {0}", secretNumber.Number);
-                GuessTextBox.Enabled = false;
-                SendGuessButton.Enabled = false;
-            }
+                int guess = int.Parse(GuessTextBox.Text);
+                Outcome outcome = secretNumber.MakeGuess(guess);
 
-            if (outcome == Outcome.Correct)
-            {
-                HelperLabel.Text = String.Format("Grattis du klarade det på {0} försök", secretNumber.Count);
-                GuessTextBox.Enabled = false;
-                SendGuessButton.Enabled = false;
-            }
+                PlaceHolder.Visible = true;
 
-            if (outcome == Outcome.High)
-            {
-                HelperLabel.Text = "För högt gissat";
-            }
+                if (outcome == Outcome.NoMoreGuesses)
+                {
+                    HelperLabel.Text = String.Format("Du har inga gissningarna kvar. Det hemliga talet var {0}", secretNumber.Number);
+                    GuessTextBox.Enabled = false;
+                    SendGuessButton.Enabled = false;
+                    ButtonPlaceHolder.Visible = true;
+                }
 
-            if (outcome == Outcome.Low)
-            {
-                HelperLabel.Text = "För lågt gissat";
-            }
+                if (outcome == Outcome.Correct)
+                {
+                    HelperLabel.Text = String.Format("Grattis du klarade det på {0} försök", secretNumber.Count);
+                    GuessTextBox.Enabled = false;
+                    SendGuessButton.Enabled = false;
+                    ButtonPlaceHolder.Visible = true;
+                }
 
-            if (outcome == Outcome.PreviousGuess)
-            {
-                HelperLabel.Text = "Du har redan gissat på detta";
+                if (outcome == Outcome.High)
+                {
+                    HelperLabel.Text = "För högt gissat";
+                }
+
+                if (outcome == Outcome.Low)
+                {
+                    HelperLabel.Text = "För lågt gissat";
+                }
+
+                if (outcome == Outcome.PreviousGuess)
+                {
+                    HelperLabel.Text = "Du har redan gissat på detta";
+                }
+                GuessedLabel.Text = String.Join(", ", secretNumber.PreviousGuesses); 
             }
-            GuessedLabel.Text = String.Join(", ", secretNumber.PreviousGuesses);
               
         }
 

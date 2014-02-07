@@ -11,13 +11,13 @@ namespace HemligaTalet.Model
     {
         private int _number;
         private List<int> _previousGuesses;
-        private const int _MaxNumberOfGuesses = 7;
+        private const int MaxNumberOfGuesses = 7;
 
         public bool CanMakeGuess
         {
             get
             {
-                return Count < _MaxNumberOfGuesses;
+                return Count < MaxNumberOfGuesses;
             }
         }
 
@@ -75,10 +75,6 @@ namespace HemligaTalet.Model
                 throw new ArgumentOutOfRangeException();
             }
 
-            if (!CanMakeGuess)
-            {
-                Outcome = Outcome.NoMoreGuesses;
-            }
             else if (_previousGuesses.Contains(guess))
             {
                 Outcome = Outcome.PreviousGuess;
@@ -87,17 +83,22 @@ namespace HemligaTalet.Model
             {
                 _previousGuesses.Add(guess);
 
-                if (guess == _number)
+                if (!CanMakeGuess)
+                {
+                    Outcome = Outcome.NoMoreGuesses;
+                }
+
+                else if (guess == _number)
                 {
                     Outcome = Outcome.Correct;
                 }
 
-                if (guess > _number)
+                else if (guess > _number)
                 {
                     Outcome = Outcome.High;
                 }
 
-                if (guess < _number)
+                else if (guess < _number)
                 {
                     Outcome = Outcome.Low;
                 } 
@@ -108,7 +109,7 @@ namespace HemligaTalet.Model
 
         public SecretNumber()
         {
-            _previousGuesses = new List<int>(7);
+            _previousGuesses = new List<int>(MaxNumberOfGuesses);
             Initalize();
         }
     }
