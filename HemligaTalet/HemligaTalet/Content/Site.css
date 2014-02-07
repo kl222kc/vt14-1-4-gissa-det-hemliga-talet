@@ -4,4 +4,10 @@
 
 #GuessTextBox {
     width: 50px;
+    text-align: right;
+}
+
+.guessed {
+    color: #c0c0c0;
+    font-style: italic;
 }
