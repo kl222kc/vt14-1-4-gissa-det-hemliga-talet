@@ -19,7 +19,17 @@
     </div>
         <p>
         <asp:Label ID="GuessedLabel" runat="server"></asp:Label>
-        </p>    
+        </p>
+
+        <asp:PlaceHolder ID="PlaceHolder" runat="server" Visible="false">
+        <p>
+        <asp:Label ID="HelperLabel" runat="server"></asp:Label>
+        </p>
+        <p>
+            <asp:Button ID="ResetButton" runat="server" Text="Slumpa nytt hemligt tal" OnClick="ResetButton_Click" />
+        </p>
+        </asp:PlaceHolder>
+       
     </form>
 </body>
 </html>
