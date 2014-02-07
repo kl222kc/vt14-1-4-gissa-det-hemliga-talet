@@ -5,19 +5,20 @@ using System.Web;
 
 namespace HemligaTalet.Model
 {
-
     public enum Outcome {Indefinite, Low, High, Correct, NoMoreGuesses, PreviousGuess};
+
     public class SecretNumber
     {
+        private const int MaxNumberOfGuesses = 7;
+
         private int _number;
         private List<int> _previousGuesses;
-        private const int MaxNumberOfGuesses = 7;
 
         public bool CanMakeGuess
         {
             get
             {
-                return Count < MaxNumberOfGuesses;
+                return Count < MaxNumberOfGuesses && !_previousGuesses.Contains(_number);
             }
         }
 
@@ -47,15 +48,21 @@ namespace HemligaTalet.Model
         public Outcome Outcome
         {
             get;
-            set;
+            private set;
         }
 
         public IEnumerable<int> PreviousGuesses
         {
             get
             {
-                return _previousGuesses;
+                return _previousGuesses.AsReadOnly();
             }
+        }
+
+        public SecretNumber()
+        {
+            _previousGuesses = new List<int>(MaxNumberOfGuesses);
+            Initalize();
         }
 
         public void Initalize()
@@ -105,12 +112,6 @@ namespace HemligaTalet.Model
             }
 
             return Outcome;
-        }
-
-        public SecretNumber()
-        {
-            _previousGuesses = new List<int>(MaxNumberOfGuesses);
-            Initalize();
         }
     }
 }

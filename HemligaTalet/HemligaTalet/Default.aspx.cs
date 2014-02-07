@@ -15,15 +15,7 @@ namespace HemligaTalet
         {
             get
             {
-                if (Session["Game"] == null)
-                {
-                    Session["Game"] = new SecretNumber();
-                }
-                return Session["Game"] as SecretNumber;
-            }
-            set 
-            { 
-                Session["Game"] = value; 
+                return Session["Game"] as SecretNumber ?? (SecretNumber)(Session["Game"] = new SecretNumber());
             }
         }
 
