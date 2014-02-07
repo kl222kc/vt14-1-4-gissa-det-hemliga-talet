@@ -72,7 +72,7 @@ namespace HemligaTalet.Model
 
             if (guess > 100 || guess < 1)
             {
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("En gissning måste vara mellan 1 och 100");
             }
 
             else if (_previousGuesses.Contains(guess))

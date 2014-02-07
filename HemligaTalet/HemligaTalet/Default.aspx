@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Gissa det hemliga talet</title>
-    <link href="Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
@@ -30,9 +30,9 @@
     </asp:PlaceHolder>
 
     <asp:PlaceHolder ID="ButtonPlaceHolder" runat="server" Visible="false">
-    <p>
+        <p>
             <asp:Button ID="ResetButton" runat="server" Text="Slumpa nytt hemligt tal" OnClick="ResetButton_Click"  CausesValidation="False" />
-    </p>
+        </p>
     </asp:PlaceHolder>
        
     </form>
